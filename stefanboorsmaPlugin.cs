@@ -9,7 +9,7 @@ namespace Stefan95228
     public partial class Stefan95228Plugin : BaseUnityPlugin
     {
         private bool _oneindigLeven = true;
-        private bool _superSchade = true;
+       
 
         private void Awake()
         {
@@ -28,10 +28,6 @@ namespace Stefan95228
                 PlayerData.instance.SetInt("health", maxHealth);
             }
 
-            // VOORBEELD 2: Super Schade (Wapenschade op 999 zetten)
-            if (_superSchade)
-            {
-                PlayerData.instance.SetInt("nailDamage", 999); 
             }
         }
     }
