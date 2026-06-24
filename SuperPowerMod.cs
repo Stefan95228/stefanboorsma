@@ -2,16 +2,19 @@ using BepInEx;
 using UnityEngine;
 using HarmonyLib;
 
-[HarmonyPatch(typeof(HealthManager), "TakeDamage")]
-public static class HealthManager_TakeDamage_Patch
+namespace Stefan95228
 {
-    // Prefix: loopt VOOR de originele functie. Door hp hier al naar 0 te zetten,
-    // laten we de game zelf de "dood" animatie/logica afhandelen zoals normaal.
-    public static void Prefix(HealthManager __instance)
+    [HarmonyPatch(typeof(HealthManager), "TakeDamage")]
+    public static class HealthManager_TakeDamage_Patch
     {
-        // Niet de speler zelf one-shotten (extra veiligheid).
-        if (__instance.gameObject.GetComponent<HeroController>() != null) return;
+        // Prefix: loopt VOOR de originele functie. Door hp hier al naar 0 te zetten,
+        // laten we de game zelf de "dood" animatie/logica afhandelen zoals normaal.
+        public static void Prefix(HealthManager __instance)
+        {
+            // Niet de speler zelf one-shotten (extra veiligheid).
+            if (__instance.gameObject.GetComponent<HeroController>() != null) return;
 
-        __instance.hp = 0;
+            __instance.hp = 0;
+        }
     }
 }
