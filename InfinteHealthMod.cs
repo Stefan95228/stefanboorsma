@@ -15,7 +15,7 @@ namespace Stefan95228
         {
             Logger.LogInfo("Stefan's Cheats Mod is succesvol opgestart via AutoPlugin!");
 
-            // Harmony patches toepassen (voor de one-hit-kill, zie class onderaan dit bestand)
+            // Harmony patches toepassen (nodig voor SuperPowerMod.cs om te werken!)
             new Harmony("stefan95228.cheats").PatchAll();
         }
 
@@ -30,23 +30,6 @@ namespace Stefan95228
                 int maxHealth = PlayerData.instance.GetInt("maxHealth");
                 PlayerData.instance.SetInt("health", maxHealth);
             }
-        }
-    }
-
-    // Patcht HealthManager.TakeDamage zodat vijanden in 1 hit doodgaan.
-    // (De oude aanpak met PlayerData "nailDamage" werkte niet, omdat Silksong
-    // schade niet op die manier berekent.)
-    [HarmonyPatch(typeof(HealthManager), "TakeDamage")]
-    public static class HealthManager_TakeDamage_Patch
-    {
-        // Prefix: loopt VOOR de originele functie. Door hp hier al naar 0 te zetten,
-        // laten we de game zelf de "dood" animatie/logica afhandelen zoals normaal.
-        public static void Prefix(HealthManager __instance)
-        {
-            // Niet de speler zelf one-shotten (extra veiligheid).
-            if (__instance.gameObject.GetComponent<HeroController>() != null) return;
-
-            __instance.hp = 0;
         }
     }
 }
