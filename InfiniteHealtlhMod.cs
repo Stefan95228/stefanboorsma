@@ -1,4 +1,5 @@
 using BepInEx;
+using HarmonyLib;
 using UnityEngine;
 
 namespace Stefan95228
@@ -9,11 +10,13 @@ namespace Stefan95228
     public partial class Stefan95228Plugin : BaseUnityPlugin
     {
         private bool _oneindigLeven = true;
-       
 
         private void Awake()
         {
             Logger.LogInfo("Stefan's Cheats Mod is succesvol opgestart via AutoPlugin!");
+
+            // Harmony patches toepassen (nodig voor SuperPowerMod.cs om te werken!)
+            new Harmony("stefan95228.cheats").PatchAll();
         }
 
         private void Update()
@@ -27,8 +30,6 @@ namespace Stefan95228
                 int maxHealth = PlayerData.instance.GetInt("maxHealth");
                 PlayerData.instance.SetInt("health", maxHealth);
             }
-
-            
         }
     }
 }
