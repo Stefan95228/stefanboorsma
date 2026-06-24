@@ -28,7 +28,7 @@ namespace Stefan95228
                 PlayerData.instance.SetInt("health", maxHealth);
             }
 
-            }
+            
         }
     }
 }
