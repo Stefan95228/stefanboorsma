@@ -35,24 +35,23 @@ namespace Stefan95228
         }
 
         private void Update()
-        {
-               // Veiligheidscheck: doe niets als we nog in het hoofdmenu staan
-            if (HeroController.instance == null) return;
- 
-            // Hotkey check: als de toets net is ingedrukt, wissel de instelling om.
-            if (OneindigLevenHotkey.Value.IsDown())
-            {
-                OneindigLevenEnabled.Value = !OneindigLevenEnabled.Value;
-                Logger.LogInfo($"Oneindig leven: {(OneindigLevenEnabled.Value ? "AAN" : "UIT")}");
-            // Veiligheidscheck: doe niets als we nog in het hoofdmenu staan
-            if (HeroController.instance == null) return;
+    {
+        // Veiligheidscheck: doe niets als we nog in het hoofdmenu staan
+        if (HeroController.instance == null) return;
 
-            // VOORBEELD 1: Oneindig leven
-            if (OneindigLevenEnabled.Value)
-            {
-                int maxHealth = PlayerData.instance.GetInt("maxHealth");
-                PlayerData.instance.SetInt("health", maxHealth);
-            }
+        // Hotkey check: als de toets net is ingedrukt, wissel de instelling om.
+        if (OneindigLevenHotkey.Value.IsDown())
+        {
+            OneindigLevenEnabled.Value = !OneindigLevenEnabled.Value;
+            Logger.LogInfo($"Oneindig leven: {(OneindigLevenEnabled.Value ? "AAN" : "UIT")}");
         }
+
+        // VOORBEELD 1: Oneindig leven
+        if (OneindigLevenEnabled.Value)
+        {
+            int maxHealth = PlayerData.instance.GetInt("maxHealth");
+            PlayerData.instance.SetInt("health", maxHealth);
+        }
+    }
     }
 }
