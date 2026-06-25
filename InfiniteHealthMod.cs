@@ -1,4 +1,5 @@
 using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
 
@@ -6,9 +7,11 @@ namespace Stefan95228
 {
     // De generator (AutoPlugin) maakt op de achtergrond zelf het [BepInPlugin] label aan.
     // Door 'partial' te gebruiken, plakken we onze cheat-code aan die gegenereerde code vast.
-    
     public partial class Stefan95228Plugin : BaseUnityPlugin
     {
+        public static ConfigEntry<bool> OneindigLevenEnabled;
+        public static ConfigEntry<KeyboardShortcut> OneindigLevenHotkey;
+
         private void Awake()
         {
             Logger.LogInfo("Stefan's Cheats Mod is succesvol opgestart via AutoPlugin!");
@@ -23,7 +26,7 @@ namespace Stefan95228
                 true,
                 "Schakel oneindig leven (health) in of uit."
             );
- 
+
             OneindigLevenHotkey = Config.Bind(
                 "Cheats",
                 "Oneindig Leven Hotkey",
@@ -31,8 +34,8 @@ namespace Stefan95228
                 "Toets om oneindig leven aan/uit te zetten tijdens het spelen."
             );
 
-            // Initialize SuperPowerMod config bindings.
-            SuperPowerMod.Initialize(Config);
+            // Initialize SuperPowerMod config
+            HealthManager_TakeDamage_Patch.Initialize(Config);
         }
 
         private void Update()
@@ -40,15 +43,15 @@ namespace Stefan95228
             // Veiligheidscheck: doe niets als we nog in het hoofdmenu staan
             if (HeroController.instance == null) return;
 
-            // One-hit-kill hotkey check.
-            SuperPowerMod.CheckHotkey();
-
             // Hotkey check: als de toets net is ingedrukt, wissel de instelling om.
             if (OneindigLevenHotkey.Value.IsDown())
             {
                 OneindigLevenEnabled.Value = !OneindigLevenEnabled.Value;
                 Logger.LogInfo($"Oneindig leven: {(OneindigLevenEnabled.Value ? "AAN" : "UIT")}");
             }
+
+            // Check SuperPowerMod hotkey
+            HealthManager_TakeDamage_Patch.CheckHotkey();
 
             // VOORBEELD 1: Oneindig leven
             if (OneindigLevenEnabled.Value)
