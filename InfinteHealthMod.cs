@@ -6,7 +6,6 @@ namespace Stefan95228
 {
     // De generator (AutoPlugin) maakt op de achtergrond zelf het [BepInPlugin] label aan.
     // Door 'partial' te gebruiken, plakken we onze cheat-code aan die gegenereerde code vast.
-    [BepInAutoPlugin]
     public partial class Stefan95228Plugin : BaseUnityPlugin
     {
         private bool _oneindigLeven = true;

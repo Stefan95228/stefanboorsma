@@ -1,6 +1,8 @@
 using BepInEx;
 using UnityEngine;
 using HarmonyLib;
+using BepInEx.Configuration;
+using BepInEx.Utility;
 
 namespace Stefan95228
 {
