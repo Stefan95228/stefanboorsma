@@ -2,18 +2,17 @@ using BepInEx;
 using UnityEngine;
 using HarmonyLib;
 using BepInEx.Configuration;
-using BepInEx.Utility;
 
 namespace Stefan95228
 {
     [HarmonyPatch(typeof(HealthManager), "TakeDamage")]
     public static class HealthManager_TakeDamage_Patch
     {
-        // Prefix: loopt VOOR de originele functie. Door hp hier al naar 0 te zetten,
+         // Prefix: loopt VOOR de originele functie. Door hp hier al naar 0 te zetten,
         // laten we de game zelf de "dood" animatie/logica afhandelen zoals normaal.
       
       
-       // Eigen ConfigEntry voor deze cheat, los van InfiniteHealthMod.
+        // Eigen ConfigEntry voor deze cheat, los van InfiniteHealthMod.
         // Verschijnt ook automatisch in de ConfigurationManager UI, in dezelfde "Cheats" sectie.
         public static ConfigEntry<bool> OneHitKillEnabled;
         public static ConfigEntry<KeyboardShortcut> OneHitKillHotkey;
@@ -45,7 +44,7 @@ namespace Stefan95228
             }
         }
       
-       public static void Prefix(HealthManager __instance)
+        public static void Prefix(HealthManager __instance)
         {
             // Niet de speler zelf one-shotten (extra veiligheid).
             if (__instance.gameObject.GetComponent<HeroController>() != null) return;
