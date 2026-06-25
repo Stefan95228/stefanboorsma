@@ -2,7 +2,7 @@ using BepInEx;
 using UnityEngine;
 using HarmonyLib;
 using BepInEx.Configuration;
-using BepInEx.Utility;
+using BepInEx.Configuration;
 
 namespace Stefan95228
 {
