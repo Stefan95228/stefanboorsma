@@ -30,7 +30,7 @@ namespace Stefan95228
             OneindigLevenHotkey = Config.Bind(
                 "Cheats",
                 "Oneindig Leven Hotkey",
-                new KeyboardShortcut(KeyCode.F1),
+                new KeyboardShortcut(KeyCode.F3),
                 "Toets om oneindig leven aan/uit te zetten tijdens het spelen."
             );
 
