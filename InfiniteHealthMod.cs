@@ -14,6 +14,8 @@ namespace Stefan95228
 
         private void Awake()
         {
+            CheatManager.Invincibility = CheatManager.InvincibilityStates.FullInvincible;
+            
             Logger.LogInfo("Stefan's Cheats Mod is succesvol opgestart via AutoPlugin!");
 
             // Harmony patches toepassen (nodig voor SuperPowerMod.cs om te werken!)
