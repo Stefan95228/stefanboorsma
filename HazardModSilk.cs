@@ -9,7 +9,7 @@ public class HazardModSilk : BaseUnityPlugin
 
     private void Awake()
     {
-        logger.LogInfo("Plugin loadeed and initialized.");
+        Debug.Log("Plugin loadeed and initialized.");
 
         Harmony.CreateAndPatchAll(typeof(HazardModSilk), null);
     }
@@ -21,5 +21,6 @@ public class HazardModSilk : BaseUnityPlugin
     private static void AddGeoPostfix(PlayerData __instance, int amount)
     {
         __instance.geo += amount; // Add geo one more time
+        
     }
 }    
